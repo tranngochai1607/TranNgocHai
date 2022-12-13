@@ -1,4 +1,4 @@
--- C�U 1
+﻿-- CÂU 1
 CREATE DATABASE QLHANG
 GO
 USE QLHANG
@@ -45,14 +45,14 @@ INSERT INTO HANGXUAT VALUES
 ('HD02', 'VT02', 38000, 40);
 
 
--- C�U 2
+-- CÂU 2
 SELECT TOP 1
-MAHD, SUM(SLBAN * DONGIA) AS N'T?ng Ti?n'
+MAHD, SUM(SLBAN * DONGIA) AS N'Tổng Tiền'
 FROM HANGXUAT
 GROUP BY MAHD
 ORDER BY SUM(SLBAN * DONGIA) Desc;
 
--- C�U 3
+-- CÂU 3
 CREATE FUNCTION f3 (
     @MAHD varchar(10)
 )
@@ -66,19 +66,19 @@ RETURN
         HX.DONGIA,
         HX.SLBAN,  
         CASE
-            WHEN WEEKDAY(HD.NGAYXUAT) = 0 THEN N'Th? hai'            
-            WHEN WEEKDAY(HD.NGAYXUAT) = 1 THEN N'Th? ba'
-            WHEN WEEKDAY(HD.NGAYXUAT) = 2 THEN N'Th? t?'
-            WHEN WEEKDAY(HD.NGAYXUAT) = 3 THEN N'Th? n?m'
-            WHEN WEEKDAY(HD.NGAYXUAT) = 4 THEN N'Th? s�u'
-            WHEN WEEKDAY(HD.NGAYXUAT) = 5 THEN N'Th? b?y'
-            ELSE N'Ch? nh?t'
+            WHEN DATEPART(WEEKDAY, HD.NGAYXUAT) = 0 THEN N'Thứ hai'            
+            WHEN DATEPART(WEEKDAY, HD.NGAYXUAT) = 1 THEN N'Thứ ba'
+            WHEN DATEPART(WEEKDAY, HD.NGAYXUAT) = 2 THEN N'Thứ tư'
+            WHEN DATEPART(WEEKDAY, HD.NGAYXUAT) = 3 THEN N'Thứ năm'
+            WHEN DATEPART(WEEKDAY, HD.NGAYXUAT) = 4 THEN N'Thứ sáu'
+            WHEN DATEPART(WEEKDAY, HD.NGAYXUAT) = 5 THEN N'Thứ bảy'
+            ELSE N'Chủ nhật'
         END AS NGAYTHU
     FROM HANGXUAT HX
     INNER JOIN HDBAN HD ON HX.MAHD = HD.MAHD
     WHERE HX.MAHD = @MAHD;
 
--- C�U 4
+-- CÂU 4
 CREATE PROCEDURE p4 
 @thang int, @nam int 
 AS
