@@ -118,21 +118,3 @@ begin
  set SiSo=@ss
  where malop in (select malop from inserted)
  end
---5.T?o 2 login user1 và user2 ??ng nh?p vào sql, t?o 2 user tên user1 và user2 
---trên CSDL Qu?n lý Sinh viên t??ng ?ng v?i 2 login v?a t?o.
---tao login
-create login user1 with password = '123'
-create login user2 with password = '456'
---hoac
-sp_addlogin 'user1','123'
---tao user
-create user user1 for login user1
-create user user2 for login user2
-C:\data\HSGD_HKI_2018\HeQTCSDL\Dapan_OntapSQL.sql 3
---hoac
-sp_adduser 'user1','user1'
-go
---6.Gán quy?n cho user 1 các quy?n Insert, Update, trên b?ng sinhvien, 
---gán quy?n select cho user2 trên b?ng sinhvien
-grant Insert, Update on sinhvien to user1
-grant select on sinhvien to user2
